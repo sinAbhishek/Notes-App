@@ -11,21 +11,18 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import BotDrawer from "./drawer";
 const Notemodal = (prop) => {
-  const [color, setcolor] = useState("white");
+  const [color, setcolor] = useState("#374151");
   const changecolor = (value) => {
     setcolor(value);
+    prop.color(value);
   };
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
-      {/* <Button onClick={onOpen}>Open Modal</Button> */}
-
       <Modal isOpen={prop.isOpen} onClose={prop.onClose}>
         <ModalOverlay />
         <ModalContent h={"60vh"} backgroundColor={color}>
-          <ModalHeader>
-            <input className="p-2 rounded-md" type="text" placeholder="Title" />
-          </ModalHeader>
+          <ModalHeader>NOTE</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <textarea
@@ -38,7 +35,10 @@ const Notemodal = (prop) => {
               onChange={prop.note}
             ></textarea>
             <div className="flex justify-center">
-              <button onClick={prop.submit}>
+              <button
+                className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-8"
+                onClick={prop.submit}
+              >
                 <CheckIcon />
               </button>
             </div>

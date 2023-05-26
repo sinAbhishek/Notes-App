@@ -6,6 +6,7 @@ import Image from "next/image";
 import { auth } from "./firebase";
 import React, { useEffect, useState } from "react";
 import { doc, setDoc, onSnapshot, getDoc } from "firebase/firestore";
+import Notes from "./notes";
 import BotDrawer from "./drawer";
 import {
   Drawer,
@@ -17,6 +18,7 @@ import {
   DrawerCloseButton,
 } from "@chakra-ui/react";
 import { db } from "./firebase";
+import { v4 as uuidv4 } from "uuid";
 import { collection, addDoc, updateDoc, deleteField } from "firebase/firestore";
 import { useDisclosure, Button, Input } from "@chakra-ui/react";
 import Notemodal from "./notemodal";
@@ -26,6 +28,7 @@ export default function Home() {
   const router = useRouter();
   const { uid } = useContext(Authcontext);
   const [note, setnote] = useState([]);
+  const [color, setcolor] = useState("#374151");
   const [data, setdata] = useState([]);
   const [list, setlist] = useState([]);
   const [text, settext] = useState("");
@@ -36,8 +39,12 @@ export default function Home() {
   const btnRef = React.useRef();
   const handle = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    settext({ id: 1, [e.target.id]: e.target.value });
+    settext({
+      id: uuidv4(),
+      [e.target.id]: e.target.value,
+      color: color,
+      time: new Date(Date.now()).toLocaleString(),
+    });
   };
   useEffect(() => {
     const call = async () => {
@@ -104,7 +111,6 @@ export default function Home() {
   };
   useEffect(() => {
     const call = async () => {
-      console.log(array);
       const res = await setDoc(doc(db, "notes", uid), { ...array });
     };
     array && call();
@@ -128,6 +134,13 @@ export default function Home() {
   const openColor = () => {
     setisOpen(!isOpen);
   };
+  const colorchange = (value) => {
+    setcolor(value);
+  };
+  const drop = (id) => {
+    const filter = note.filter((c) => c.id !== id);
+    setarray({ ...data, Notes: [...filter] });
+  };
   return (
     <div className="h-screen w-screen flex bg-slate-900">
       <div className="sidepanel h-full w-40 bg-slate-100">
@@ -140,15 +153,16 @@ export default function Home() {
         </button>
       </div>
       {/* <input type="text" id="text" onChange={handle} /> */}
-      <button onClick={set}>Get user</button>
-      <Button ref={btnRef} colorScheme="teal" onClick={openColor}>
-        Open
-      </Button>
+      {note.map((c) => (
+        <Notes key={c.id} notes={c} delete={drop} />
+      ))}
+
       <Notemodal
         note={handle}
         isOpen={modal}
         onClose={closeNote}
         submit={set}
+        color={colorchange}
       />
       {/* <BotDrawer onClose={openColor} isOpen={isOpen} /> */}
     </div>
