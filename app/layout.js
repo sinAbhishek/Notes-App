@@ -1,5 +1,8 @@
+"use client";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { ChakraProvider } from "@chakra-ui/react";
 import { AuthcontextProvider } from "./authcontext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,7 +16,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthcontextProvider>{children}</AuthcontextProvider>
+        <ChakraProvider>
+          <AuthcontextProvider>{children}</AuthcontextProvider>
+        </ChakraProvider>
       </body>
     </html>
   );

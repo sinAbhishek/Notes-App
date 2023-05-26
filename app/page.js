@@ -6,9 +6,20 @@ import Image from "next/image";
 import { auth } from "./firebase";
 import React, { useEffect, useState } from "react";
 import { doc, setDoc, onSnapshot, getDoc } from "firebase/firestore";
+import BotDrawer from "./drawer";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
 import { db } from "./firebase";
 import { collection, addDoc, updateDoc, deleteField } from "firebase/firestore";
-
+import { useDisclosure, Button, Input } from "@chakra-ui/react";
+import Notemodal from "./notemodal";
 // Add a new document with a generated id.
 
 export default function Home() {
@@ -19,8 +30,13 @@ export default function Home() {
   const [list, setlist] = useState([]);
   const [text, settext] = useState("");
   const [array, setarray] = useState("");
+  const [modal, setmodal] = useState(false);
+
+  const [isOpen, setisOpen] = useState(false);
+  const btnRef = React.useRef();
   const handle = (e) => {
     e.preventDefault();
+    console.log(e.target.value);
     settext({ id: 1, [e.target.id]: e.target.value });
   };
   useEffect(() => {
@@ -88,6 +104,7 @@ export default function Home() {
   };
   useEffect(() => {
     const call = async () => {
+      console.log(array);
       const res = await setDoc(doc(db, "notes", uid), { ...array });
     };
     array && call();
@@ -101,10 +118,39 @@ export default function Home() {
   const test = () => {
     console.log(auth.currentUser);
   };
+  const closeNote = () => {
+    setmodal(!modal);
+  };
+
+  const openNote = () => {
+    setmodal(!modal);
+  };
+  const openColor = () => {
+    setisOpen(!isOpen);
+  };
   return (
-    <div>
-      <input type="text" id="text" onChange={handle} />
+    <div className="h-screen w-screen flex bg-slate-900">
+      <div className="sidepanel h-full w-40 bg-slate-100">
+        <button className="m-8">Add note</button>
+        <button className="m-8" onClick={openNote}>
+          Add to do list
+        </button>
+        <button className="m-8" onClick={openColor}>
+          Change Color
+        </button>
+      </div>
+      {/* <input type="text" id="text" onChange={handle} /> */}
       <button onClick={set}>Get user</button>
+      <Button ref={btnRef} colorScheme="teal" onClick={openColor}>
+        Open
+      </Button>
+      <Notemodal
+        note={handle}
+        isOpen={modal}
+        onClose={closeNote}
+        submit={set}
+      />
+      {/* <BotDrawer onClose={openColor} isOpen={isOpen} /> */}
     </div>
   );
 }
