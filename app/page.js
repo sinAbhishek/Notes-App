@@ -22,6 +22,7 @@ import { v4 as uuidv4 } from "uuid";
 import { collection, addDoc, updateDoc, deleteField } from "firebase/firestore";
 import { useDisclosure, Button, Input } from "@chakra-ui/react";
 import Notemodal from "./notemodal";
+import Todomodal from "./todomodal";
 // Add a new document with a generated id.
 
 export default function Home() {
@@ -34,7 +35,7 @@ export default function Home() {
   const [text, settext] = useState("");
   const [array, setarray] = useState("");
   const [modal, setmodal] = useState(false);
-
+  const [listOpen, setlistOpen] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const btnRef = React.useRef();
   const handle = (e) => {
@@ -141,11 +142,16 @@ export default function Home() {
     const filter = note.filter((c) => c.id !== id);
     setarray({ ...data, Notes: [...filter] });
   };
+  const closeList = () => {
+    setlistOpen(!listOpen);
+  };
   return (
     <div className="h-screen w-screen flex bg-slate-900">
       <div className="sidepanel h-full w-40 bg-slate-100">
-        <button className="m-8">Add note</button>
         <button className="m-8" onClick={openNote}>
+          Add note
+        </button>
+        <button className="m-8" onClick={closeList}>
           Add to do list
         </button>
         <button className="m-8" onClick={openColor}>
@@ -156,7 +162,7 @@ export default function Home() {
       {note.map((c) => (
         <Notes key={c.id} notes={c} delete={drop} />
       ))}
-
+      <Todomodal isOpen={listOpen} onClose={closeList} color={colorchange} />
       <Notemodal
         note={handle}
         isOpen={modal}
