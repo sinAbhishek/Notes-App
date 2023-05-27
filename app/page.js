@@ -8,21 +8,14 @@ import React, { useEffect, useState } from "react";
 import { doc, setDoc, onSnapshot, getDoc } from "firebase/firestore";
 import Notes from "./notes";
 import BotDrawer from "./drawer";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from "@chakra-ui/react";
 import { db } from "./firebase";
 import { v4 as uuidv4 } from "uuid";
 import { collection, addDoc, updateDoc, deleteField } from "firebase/firestore";
 import { useDisclosure, Button, Input } from "@chakra-ui/react";
 import Notemodal from "./notemodal";
 import Todomodal from "./todomodal";
+import Todo from "./todo";
+import DrawerMlist from "./drawerMlist";
 // Add a new document with a generated id.
 
 export default function Home() {
@@ -35,6 +28,7 @@ export default function Home() {
   const [text, settext] = useState("");
   const [array, setarray] = useState("");
   const [modal, setmodal] = useState(false);
+  const [dMlOpen, setdMlOpen] = useState(false);
   const [listOpen, setlistOpen] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const btnRef = React.useRef();
@@ -56,6 +50,7 @@ export default function Home() {
     };
     setarray({ ...data, Todolist: [...list, newlist] });
   };
+
   useEffect(() => {
     const call = async () => {
       const res = await setDoc(doc(db, "notes", uid), {
@@ -63,19 +58,6 @@ export default function Home() {
         Notes: note,
       });
     };
-
-    // const call = async () => {
-    //   const docRef = doc(db, `cities/${uid}`);
-    //   const docSnap = await getDoc(docRef);
-
-    //   if (docSnap.exists()) {
-    //     console.log("Document data:", docSnap.data());
-    //   } else {
-    //     // docSnap.data() will be undefined in this case
-    //     console.log("No such document!");
-    //   }
-    // };
-    // call();
 
     const unsub = onSnapshot(doc(db, `notes`, uid), (snapshot) => {
       if (snapshot.data()) {
@@ -86,16 +68,6 @@ export default function Home() {
       } else {
         call();
       }
-
-      // if (snapshot.docs.length !== 0) {
-      //   const array = snapshot.docs.filter(
-      //     (cr) => cr.id === "Xnn39q3PCH8Iz7qrjDDv"
-      //   );
-      //   console.log(snapshot.data());
-      //   setdata(array);
-      // } else {
-      //   console.log("no such document");
-      // }
     });
     return () => {
       unsub();
@@ -106,18 +78,6 @@ export default function Home() {
     console.log(note);
     console.log(text);
     setarray({ ...data, Notes: [...note, text] });
-    // const docRef = await addDoc(collection(db, "cities"), {
-    //   name: { text },
-    //   country: "Japan",
-    // });
-
-    // console.log(data);
-    // const cityRef = doc(db, "cities", "Xnn39q3PCH8Iz7qrjDDv", "array");
-
-    // Remove the 'capital' field from the document
-    // await updateDoc(cityRef, {
-    //   hehe: deleteField(),
-    // });
   };
   useEffect(() => {
     const call = async () => {
@@ -147,16 +107,23 @@ export default function Home() {
   const colorchange = (value) => {
     setcolor(value);
   };
-  const drop = (id) => {
+  const deleteNote = (id) => {
     const filter = note.filter((c) => c.id !== id);
     setarray({ ...data, Notes: [...filter] });
+  };
+  const deleteList = (id) => {
+    const filter = list.filter((c) => c.id !== id);
+    setarray({ ...data, Todolist: [...filter] });
   };
   const closeList = () => {
     setlistOpen(!listOpen);
   };
+  const DrawerMoC = () => {
+    setdMlOpen(!dMlOpen);
+  };
   return (
     <div className="h-screen w-screen flex bg-slate-900">
-      <div className="sidepanel h-full w-40 bg-slate-100">
+      <div className="sidepanel h-full w-40 bg-slate-100  hidden md:block">
         <button className="m-8" onClick={openNote}>
           Add note
         </button>
@@ -169,8 +136,12 @@ export default function Home() {
       </div>
       {/* <input type="text" id="text" onChange={handle} /> */}
       {note.map((c) => (
-        <Notes key={c.id} notes={c} delete={drop} />
+        <Notes key={c.id} notes={c} delete={deleteNote} />
       ))}
+      {list.map((c) => (
+        <Todo lists={c} delete={deleteList} />
+      ))}
+      <button onClick={DrawerMoC}>openM</button>
       <Todomodal
         isOpen={listOpen}
         onClose={closeList}
@@ -184,6 +155,8 @@ export default function Home() {
         submit={set}
         color={colorchange}
       />
+
+      <DrawerMlist state={dMlOpen} close={DrawerMoC} />
       {/* <BotDrawer onClose={openColor} isOpen={isOpen} /> */}
     </div>
   );
