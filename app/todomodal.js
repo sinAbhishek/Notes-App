@@ -30,15 +30,20 @@ const Todomodal = (prop) => {
   };
   const test = () => {
     const arr = Object.values(list);
+    prop.submit(arr, color);
     console.log(count.length);
     console.log(arr);
-    console.log(list);
+    console.log(color);
   };
   const handlechange = (e) => {
     console.log(e.target.id);
     setlist((prev) => ({
       ...prev,
-      [e.target.id]: { text: e.target.value, id: e.target.id },
+      [e.target.id]: {
+        text: e.target.value,
+        id: e.target.id,
+        checked: false,
+      },
     }));
   };
   const remove = (value, i) => {
@@ -72,7 +77,7 @@ const Todomodal = (prop) => {
             <div className="flex justify-center">
               <button
                 className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-8"
-                onClick={test}
+                onClick={() => test()}
               >
                 <CheckIcon />
               </button>

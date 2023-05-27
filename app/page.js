@@ -47,6 +47,15 @@ export default function Home() {
       time: new Date(Date.now()).toLocaleString(),
     });
   };
+  const sendTodo = (array, color) => {
+    const newlist = {
+      id: uuidv4(),
+      list: array,
+      color: color,
+      time: new Date(Date.now()).toLocaleString(),
+    };
+    setarray({ ...data, Todolist: [...list, newlist] });
+  };
   useEffect(() => {
     const call = async () => {
       const res = await setDoc(doc(db, "notes", uid), {
@@ -72,7 +81,7 @@ export default function Home() {
       if (snapshot.data()) {
         setnote(snapshot.data().Notes);
         setdata(snapshot.data());
-        setlist(snapshot.data().List);
+        setlist(snapshot.data().Todolist);
         console.log(snapshot.data());
       } else {
         call();
@@ -162,7 +171,12 @@ export default function Home() {
       {note.map((c) => (
         <Notes key={c.id} notes={c} delete={drop} />
       ))}
-      <Todomodal isOpen={listOpen} onClose={closeList} color={colorchange} />
+      <Todomodal
+        isOpen={listOpen}
+        onClose={closeList}
+        color={colorchange}
+        submit={sendTodo}
+      />
       <Notemodal
         note={handle}
         isOpen={modal}
