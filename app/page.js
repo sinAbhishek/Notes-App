@@ -22,11 +22,13 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { GiNotebook } from "react-icons/gi";
 import { HiClipboardList } from "react-icons/hi";
 import DrawerNote from "./drawerNote";
+import { getAuth, signOut } from "firebase/auth";
 // Add a new document with a generated id.
 
 export default function Home() {
   const router = useRouter();
-  const { uid } = useContext(Authcontext);
+  const auth = getAuth();
+  const { uid, dispatch } = useContext(Authcontext);
   const [note, setnote] = useState([]);
   const [menu, setmenu] = useState(false);
   const [color, setcolor] = useState("#f1f5f9");
@@ -49,6 +51,15 @@ export default function Home() {
       time: new Date(Date.now()).toLocaleString(),
     });
   };
+  const signout = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch({ type: "LOGOUT" });
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   const sendTodo = (array, color) => {
     const newlist = {
       id: uuidv4(),
@@ -58,7 +69,20 @@ export default function Home() {
     };
     setarray({ ...data, Todolist: [...list, newlist] });
   };
-
+  const checked = (id, fieldId) => {
+    const filterlist = list.filter((c) => c.id === id);
+    const unchanged = list.filter((c) => c.id !== id);
+    const update = filterlist[0].list;
+    const arr = update.filter((c) => c.id === fieldId);
+    const unchangedlist = update.filter((c) => c.id !== fieldId);
+    const state = arr[0].checked;
+    const changed = { ...arr[0], checked: !state };
+    const pushlist = [...unchangedlist, changed];
+    const finalpush = [{ ...filterlist[0], list: pushlist }];
+    const combine = [...unchanged, finalpush[0]];
+    setarray({ ...data, Todolist: combine });
+    // const final=[...]
+  };
   useEffect(() => {
     const call = async () => {
       const res = await setDoc(doc(db, "notes", uid), {
@@ -66,20 +90,22 @@ export default function Home() {
         Notes: note,
       });
     };
-
-    const unsub = onSnapshot(doc(db, `notes`, uid), (snapshot) => {
-      if (snapshot.data()) {
-        setnote(snapshot.data().Notes);
-        setdata(snapshot.data());
-        setlist(snapshot.data().Todolist);
-        console.log(snapshot.data());
-      } else {
-        call();
-      }
-    });
-    return () => {
-      unsub();
+    const def = () => {
+      const unsub = onSnapshot(doc(db, `notes`, uid), (snapshot) => {
+        if (snapshot.data()) {
+          setnote(snapshot.data().Notes);
+          setdata(snapshot.data());
+          setlist(snapshot.data().Todolist);
+          console.log(snapshot.data());
+        } else {
+          call();
+        }
+      });
+      return () => {
+        unsub();
+      };
     };
+    uid !== null && def();
   }, []);
   const set = async () => {
     console.log(data);
@@ -138,16 +164,33 @@ export default function Home() {
     setdNoteOpen(!dNoteOpen);
   };
   return (
-    <div className="h-max w-screen flex bg-slate-900 ">
-      <div className="sidepanel sticky top-0 left-0 h-screen w-40 bg-slate-100  hidden md:block">
-        <button className="m-8" onClick={openNote}>
-          Add note
-        </button>
-        <button className="m-8" onClick={closeList}>
-          Add to do list
-        </button>
-        <button className="m-8" onClick={openColor}>
-          Change Color
+    <div className="md:h-max h-screen w-screen flex bg-slate-900 ">
+      <div className="sidepanel md:flex md:flex-col md:justify-between sticky top-0 left-0 h-screen w-40 bg-slate-100  hidden ">
+        <div className="">
+          <div
+            className="my-8 flex justify-between  items-cente bg-slate-300 w-full p-4 cursor-pointer"
+            onClick={openNote}
+          >
+            Note <GiNotebook display={"inline-block"} size={"2rem"} />
+          </div>
+          <div
+            className="my-8 flex justify-between items-center bg-slate-300 w-full p-4 cursor-pointer"
+            onClick={closeList}
+          >
+            List{" "}
+            <HiClipboardList
+              color="red"
+              display={"inline-block"}
+              size={"2rem"}
+            />
+          </div>
+        </div>
+
+        <button
+          className=" bg-red-500 rounded-md my-4 w-max mx-auto p-2"
+          onClick={() => signout()}
+        >
+          logout
         </button>
       </div>
 
@@ -166,7 +209,7 @@ export default function Home() {
           <h2 className=" text-slate-50 md:text-3xl">Tasks</h2>
           <div className="flex flex-wrap">
             {list.map((c) => (
-              <Todo lists={c} delete={deleteList} />
+              <Todo check={checked} lists={c} delete={deleteList} />
             ))}
           </div>
         </div>

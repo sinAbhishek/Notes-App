@@ -12,9 +12,6 @@ const Login = () => {
   const { dispatch } = useContext(Authcontext);
   const [detail, setdetails] = useState({ email: "", password: "" });
 
-  useEffect(() => {
-    uid !== null && router.push("/");
-  }, [uid]);
   const handlechange = (e) => {
     e.preventDefault();
     setdetails((prev) => ({ ...prev, [e.target.id]: e.target.value }));
