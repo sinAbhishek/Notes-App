@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 function DrawerMlist(prop) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const [color, setcolor] = useState("#374151");
+  const [color, setcolor] = useState("#f1f5f9");
   const [list, setlist] = useState([]);
   const [count, setcount] = useState([0]);
   const [id, setid] = useState([1]);

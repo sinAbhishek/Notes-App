@@ -8,8 +8,8 @@ const BotDrawer = (prop) => {
     >
       <div className="flex justify-center">
         <div
-          onClick={() => prop.color("#374151")}
-          className=" bg-gray-700 rounded-full w-8 h-8 m-2 border-green-200 border-2"
+          onClick={() => prop.color("#f1f5f9")}
+          className=" bg-slate-100 rounded-full w-8 h-8 m-2 border-green-200 border-2"
         ></div>
         <div
           onClick={() => prop.color("#fdba74")}

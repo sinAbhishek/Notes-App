@@ -12,7 +12,7 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import BotDrawer from "./drawer";
 const Todomodal = (prop) => {
-  const [color, setcolor] = useState("#374151");
+  const [color, setcolor] = useState("#f1f5f9");
   const [list, setlist] = useState([]);
   const [count, setcount] = useState([0]);
   const [id, setid] = useState([1]);

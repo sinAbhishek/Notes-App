@@ -11,7 +11,7 @@ import {
 import { CheckIcon } from "@chakra-ui/icons";
 import BotDrawer from "./drawer";
 const Notemodal = (prop) => {
-  const [color, setcolor] = useState("#374151");
+  const [color, setcolor] = useState("#f1f5f9");
   const changecolor = (value) => {
     setcolor(value);
     prop.color(value);

@@ -29,7 +29,7 @@ export default function Home() {
   const { uid } = useContext(Authcontext);
   const [note, setnote] = useState([]);
   const [menu, setmenu] = useState(false);
-  const [color, setcolor] = useState("#374151");
+  const [color, setcolor] = useState("#f1f5f9");
   const [data, setdata] = useState([]);
   const [list, setlist] = useState([]);
   const [text, settext] = useState("");
@@ -138,8 +138,8 @@ export default function Home() {
     setdNoteOpen(!dNoteOpen);
   };
   return (
-    <div className="h-screen w-screen flex bg-slate-900 ">
-      <div className="sidepanel h-full w-40 bg-slate-100  hidden md:block">
+    <div className="h-max w-screen flex bg-slate-900 ">
+      <div className="sidepanel sticky top-0 left-0 h-screen w-40 bg-slate-100  hidden md:block">
         <button className="m-8" onClick={openNote}>
           Add note
         </button>
@@ -150,13 +150,27 @@ export default function Home() {
           Change Color
         </button>
       </div>
+
       {/* <input type="text" id="text" onChange={handle} /> */}
-      {note.map((c) => (
-        <Notes key={c.id} notes={c} delete={deleteNote} />
-      ))}
-      {list.map((c) => (
-        <Todo lists={c} delete={deleteList} />
-      ))}
+      <div className="flex flex-col">
+        <div className="m-4">
+          <h2 className=" text-slate-50 md:text-3xl">My Notes</h2>
+          <div className="flex flex-wrap  ">
+            {note.map((c) => (
+              <Notes key={c.id} notes={c} delete={deleteNote} />
+            ))}
+          </div>
+        </div>
+
+        <div className="m-4">
+          <h2 className=" text-slate-50 md:text-3xl">Tasks</h2>
+          <div className="flex flex-wrap">
+            {list.map((c) => (
+              <Todo lists={c} delete={deleteList} />
+            ))}
+          </div>
+        </div>
+      </div>
 
       <Todomodal
         isOpen={listOpen}

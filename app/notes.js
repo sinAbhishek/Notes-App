@@ -5,7 +5,7 @@ const Notes = (prop) => {
   return (
     <div
       style={{ backgroundColor: prop.notes.color }}
-      className="rounded-md w-60 h-40 m-1 p-4 min-h-fit"
+      className="rounded-md w-60 h-max m-1 p-4 min-h-fit  "
     >
       <p>{prop.notes.text}</p>
       <button onClick={() => prop.delete(prop.notes.id)} className="bg-red">

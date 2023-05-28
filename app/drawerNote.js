@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import { CloseIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
 
 const DrawerNote = (prop) => {
-  const [color, setcolor] = useState("#374151");
+  const [color, setcolor] = useState("#f1f5f9");
   const changecolor = (value) => {
     setcolor(value);
     prop.color(value);
