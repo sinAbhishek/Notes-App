@@ -14,14 +14,21 @@ import { collection, addDoc, updateDoc, deleteField } from "firebase/firestore";
 import { useDisclosure, Button, Input } from "@chakra-ui/react";
 import Notemodal from "./notemodal";
 import Todomodal from "./todomodal";
+import { motion } from "framer-motion";
 import Todo from "./todo";
 import DrawerMlist from "./drawerMlist";
+import { AddIcon } from "@chakra-ui/icons";
+import { IoMdCloseCircle } from "react-icons/io";
+import { GiNotebook } from "react-icons/gi";
+import { HiClipboardList } from "react-icons/hi";
+import DrawerNote from "./drawerNote";
 // Add a new document with a generated id.
 
 export default function Home() {
   const router = useRouter();
   const { uid } = useContext(Authcontext);
   const [note, setnote] = useState([]);
+  const [menu, setmenu] = useState(false);
   const [color, setcolor] = useState("#374151");
   const [data, setdata] = useState([]);
   const [list, setlist] = useState([]);
@@ -29,6 +36,7 @@ export default function Home() {
   const [array, setarray] = useState("");
   const [modal, setmodal] = useState(false);
   const [dMlOpen, setdMlOpen] = useState(false);
+  const [dNoteOpen, setdNoteOpen] = useState(false);
   const [listOpen, setlistOpen] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const btnRef = React.useRef();
@@ -119,10 +127,18 @@ export default function Home() {
     setlistOpen(!listOpen);
   };
   const DrawerMoC = () => {
+    !dMlOpen && expand();
     setdMlOpen(!dMlOpen);
   };
+  const expand = () => {
+    setmenu(!menu);
+  };
+  const DrawerLM = () => {
+    !dNoteOpen && expand();
+    setdNoteOpen(!dNoteOpen);
+  };
   return (
-    <div className="h-screen w-screen flex bg-slate-900">
+    <div className="h-screen w-screen flex bg-slate-900 ">
       <div className="sidepanel h-full w-40 bg-slate-100  hidden md:block">
         <button className="m-8" onClick={openNote}>
           Add note
@@ -141,7 +157,7 @@ export default function Home() {
       {list.map((c) => (
         <Todo lists={c} delete={deleteList} />
       ))}
-      <button onClick={DrawerMoC}>openM</button>
+
       <Todomodal
         isOpen={listOpen}
         onClose={closeList}
@@ -156,7 +172,65 @@ export default function Home() {
         color={colorchange}
       />
 
-      <DrawerMlist state={dMlOpen} close={DrawerMoC} />
+      <DrawerMlist
+        state={dMlOpen}
+        onClose={DrawerMoC}
+        submit={sendTodo}
+        color={colorchange}
+      />
+      <DrawerNote
+        note={handle}
+        isOpen={dNoteOpen}
+        onClose={DrawerLM}
+        submit={set}
+        color={colorchange}
+      />
+      <motion.div
+        layout
+        className="  absolute bottom-0 right-0 md:hidden m-4 w-max h-max"
+      >
+        {!menu && (
+          <motion.div
+            style={{ backgroundColor: "#00fff7" }}
+            className="border-2 border-white flex justify-center items-center rounded-full w-16 h-16"
+          >
+            <button disabled={dMlOpen || dNoteOpen} onClick={expand}>
+              <AddIcon />
+            </button>
+          </motion.div>
+        )}
+        {menu && (
+          <motion.div
+            layout
+            className=" w-44 h-50 rounded-md "
+            style={{ backgroundColor: "#f75774" }}
+          >
+            <motion.button onClick={expand}>
+              <IoMdCloseCircle size={"2rem"} />
+            </motion.button>
+            <motion.div className="flex flex-col justify-center ">
+              <motion.div
+                onClick={DrawerLM}
+                className="flex m-2 items-center justify-between"
+              >
+                <motion.p className=" inline-block">ADD NOTES</motion.p>
+                <GiNotebook display={"inline-block"} size={"2rem"} />
+              </motion.div>
+              <motion.div
+                onClick={DrawerMoC}
+                className="flex m-2 items-center justify-between"
+              >
+                <motion.p className=" inline-block">ADD TODOLIST</motion.p>
+                <HiClipboardList
+                  color="red"
+                  display={"inline-block"}
+                  size={"2rem"}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </motion.div>
       {/* <BotDrawer onClose={openColor} isOpen={isOpen} /> */}
     </div>
   );

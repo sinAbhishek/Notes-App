@@ -2,7 +2,10 @@ import React from "react";
 
 const BotDrawer = (prop) => {
   return (
-    <div className="color bg-slate-900 rounded-md relative md:absolute bottom-0 right-0 translate-y-full">
+    <div
+      style={{ width: "70%", margin: "0 auto", display: "inline-block" }}
+      className="color bg-slate-900 rounded-md fixed bottom-0 md:right-0 md:absolute  md:translate-y-full"
+    >
       <div className="flex justify-center">
         <div
           onClick={() => prop.color("#374151")}
