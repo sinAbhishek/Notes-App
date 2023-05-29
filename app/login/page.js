@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useRouter } from "next/navigation";
 import { Authcontext } from "../authcontext";
-
+import Link from "next/link";
 const Login = () => {
   const router = useRouter();
   const uid = localStorage.getItem("uid");
@@ -36,9 +36,10 @@ const Login = () => {
 
   return (
     <div className=" flex justify-center items-center w-screen h-screen">
-      <div>
+      <div className="flex flex-col justify-center items-center">
+        <h2 className=" text-3xl my-16 font-bold">Login</h2>
         <form
-          className="flex bg-slate-400 justify-center items-center flex-col"
+          className="flex bg-slate-900 p-8 rounded-md justify-center items-center flex-col"
           onSubmit={login}
         >
           <input
@@ -59,10 +60,14 @@ const Login = () => {
           />
           <button
             type="submit"
-            className=" bg-gray-800 w-64 h-8 rounded text-green-400"
+            className=" bg-gray-700 w-64 h-8 rounded my-2 text-green-400"
           >
             LOGIN
           </button>
+          <Link href="/register">
+            {" "}
+            <h2 className=" text-sky-500 my-2">Register</h2>
+          </Link>
         </form>
       </div>
     </div>

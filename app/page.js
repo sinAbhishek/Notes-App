@@ -164,7 +164,10 @@ export default function Home() {
     setdNoteOpen(!dNoteOpen);
   };
   return (
-    <div className="md:h-max h-screen w-screen flex bg-slate-900 ">
+    <div
+      style={{ minHeight: "100vh" }}
+      className="md:h-max h-max w-screen flex bg-slate-900 "
+    >
       <div className="sidepanel md:flex md:flex-col md:justify-between sticky top-0 left-0 h-screen w-40 bg-slate-100  hidden ">
         <div className="">
           <div
@@ -196,23 +199,41 @@ export default function Home() {
 
       {/* <input type="text" id="text" onChange={handle} /> */}
       <div className="flex flex-col">
-        <div className="m-4">
-          <h2 className=" text-slate-50 md:text-3xl">My Notes</h2>
-          <div className="flex flex-wrap  ">
-            {note.map((c) => (
-              <Notes key={c.id} notes={c} delete={deleteNote} />
-            ))}
+        {note[0] ? (
+          <div className="m-4">
+            <h2 className=" text-slate-50 text-xl md:text-3xl">My Notes</h2>
+            <div className="flex flex-wrap  ">
+              {note.map((c) => (
+                <Notes key={c.id} notes={c} delete={deleteNote} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="m-4">
+            <h2 className=" text-slate-50 text-xl md:text-3xl">My Notes</h2>
+            <div className=" bg-slate-300 w-60 h-80 rounded-md flex justify-center items-center m-4">
+              <p>Add notes</p>
+            </div>
+          </div>
+        )}
 
-        <div className="m-4">
-          <h2 className=" text-slate-50 md:text-3xl">Tasks</h2>
-          <div className="flex flex-wrap">
-            {list.map((c) => (
-              <Todo check={checked} lists={c} delete={deleteList} />
-            ))}
+        {list[0] ? (
+          <div className="m-4">
+            <h2 className=" text-slate-50 text-xl md:text-3xl">Tasks</h2>
+            <div className="flex flex-wrap">
+              {list.map((c) => (
+                <Todo check={checked} lists={c} delete={deleteList} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="m-4">
+            <h2 className=" text-slate-50 text-xl md:text-3xl">Tasks</h2>
+            <div className=" bg-slate-300 w-60 h-80 rounded-md flex justify-center items-center m-4">
+              <p>Add todo list</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <Todomodal
@@ -242,52 +263,51 @@ export default function Home() {
         submit={set}
         color={colorchange}
       />
-      <motion.div
-        layout
-        className="  absolute bottom-0 right-0 md:hidden m-4 w-max h-max"
-      >
-        {!menu && (
-          <motion.div
-            style={{ backgroundColor: "#00fff7" }}
-            className="border-2 border-white flex justify-center items-center rounded-full w-16 h-16"
-          >
-            <button disabled={dMlOpen || dNoteOpen} onClick={expand}>
-              <AddIcon />
-            </button>
-          </motion.div>
-        )}
-        {menu && (
-          <motion.div
-            layout
-            className=" w-44 h-50 rounded-md "
-            style={{ backgroundColor: "#f75774" }}
-          >
-            <motion.button onClick={expand}>
-              <IoMdCloseCircle size={"2rem"} />
-            </motion.button>
-            <motion.div className="flex flex-col justify-center ">
-              <motion.div
-                onClick={DrawerLM}
-                className="flex m-2 items-center justify-between"
-              >
-                <motion.p className=" inline-block">ADD NOTES</motion.p>
-                <GiNotebook display={"inline-block"} size={"2rem"} />
-              </motion.div>
-              <motion.div
-                onClick={DrawerMoC}
-                className="flex m-2 items-center justify-between"
-              >
-                <motion.p className=" inline-block">ADD TODOLIST</motion.p>
-                <HiClipboardList
-                  color="red"
-                  display={"inline-block"}
-                  size={"2rem"}
-                />
+      <div className="">
+        <motion.div layout className="  fixed bottom-0 right-0 md:hidden m-4 ">
+          {!menu && (
+            <motion.div
+              style={{ backgroundColor: "#00fff7" }}
+              className="border-2 border-white flex justify-center items-center rounded-full w-16 h-16"
+            >
+              <button disabled={dMlOpen || dNoteOpen} onClick={expand}>
+                <AddIcon />
+              </button>
+            </motion.div>
+          )}
+          {menu && (
+            <motion.div
+              layout
+              className=" w-44 h-50 rounded-md "
+              style={{ backgroundColor: "#f75774" }}
+            >
+              <motion.button onClick={expand}>
+                <IoMdCloseCircle size={"2rem"} />
+              </motion.button>
+              <motion.div className="flex flex-col justify-center ">
+                <motion.div
+                  onClick={DrawerLM}
+                  className="flex m-2 items-center justify-between"
+                >
+                  <motion.p className=" inline-block">ADD NOTES</motion.p>
+                  <GiNotebook display={"inline-block"} size={"2rem"} />
+                </motion.div>
+                <motion.div
+                  onClick={DrawerMoC}
+                  className="flex m-2 items-center justify-between"
+                >
+                  <motion.p className=" inline-block">ADD TODOLIST</motion.p>
+                  <HiClipboardList
+                    color="red"
+                    display={"inline-block"}
+                    size={"2rem"}
+                  />
+                </motion.div>
               </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </motion.div>
+          )}
+        </motion.div>
+      </div>
       {/* <BotDrawer onClose={openColor} isOpen={isOpen} /> */}
     </div>
   );

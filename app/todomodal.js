@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import BotDrawer from "./drawer";
+import { CloseIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
 const Todomodal = (prop) => {
   const [color, setcolor] = useState("#f1f5f9");
   const [list, setlist] = useState([]);
@@ -67,13 +68,25 @@ const Todomodal = (prop) => {
           <ModalCloseButton />
           <ModalBody>
             {count.map((c, i) => (
-              <div className="inputcont">
-                <input onChange={handlechange} id={id[c]} type="text" />
-                <button onClick={() => remove(id[c], i)}>remove</button>
+              <div className="inputcont flex justify-center m-2">
+                <input
+                  className="p-2 rounded-sm w-72 sm:w-2/3 h-12"
+                  onChange={handlechange}
+                  id={id[c]}
+                  type="text"
+                  placeholder="Your task"
+                />
+                <button onClick={() => remove(id[c], i)}>
+                  <DeleteIcon w={"2rem"} h={"1.2rem"} />
+                </button>
               </div>
             ))}
+            <div className="flex justify-center">
+              <button className="mx-auto" onClick={clickhandle}>
+                <AddIcon />
+              </button>
+            </div>
 
-            <button onClick={clickhandle}>Plus</button>
             <div className="flex justify-center">
               <button
                 className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-8"

@@ -27,7 +27,7 @@ const Todo = (prop) => {
             type="checkbox"
             onChange={handle}
           />
-          <p className=" mx-2">{c.text}</p>
+          <p className=" mx-2 text-sm md:text-base">{c.text}</p>
         </div>
       ))}
     </div>

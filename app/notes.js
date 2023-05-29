@@ -14,7 +14,7 @@ const Notes = (prop) => {
       >
         <IoMdCloseCircle size={"2rem"} />
       </button>
-      <p>{prop.notes.text}</p>
+      <p className=" text-sm md:text-base">{prop.notes.text}</p>
     </div>
   );
 };
