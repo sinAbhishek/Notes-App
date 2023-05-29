@@ -25,6 +25,7 @@ import { HiClipboardList } from "react-icons/hi";
 import DrawerNote from "./drawerNote";
 import { getAuth, signOut } from "firebase/auth";
 import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
+import dynamic from "next/dynamic";
 // Add a new document with a generated id.
 
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
       time: new Date(Date.now()).toLocaleString(),
     });
   };
+
   const signout = () => {
     signOut(auth)
       .then(() => {
