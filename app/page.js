@@ -1,7 +1,7 @@
 "use client";
 import { Authcontext } from "./authcontext";
 import { useContext } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { auth } from "./firebase";
 import React, { useEffect, useState } from "react";
@@ -86,6 +86,7 @@ export default function Home() {
     // const final=[...]
   };
   useEffect(() => {
+    console.log(router.isFallback);
     const call = async () => {
       const res = await setDoc(doc(db, "notes", uid), {
         Todolist: list,

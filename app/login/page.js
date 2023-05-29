@@ -3,7 +3,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { Authcontext } from "../authcontext";
 import Link from "next/link";
 const Login = () => {
