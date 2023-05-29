@@ -98,7 +98,6 @@ export default function Home() {
           setnote(snapshot.data().Notes);
           setdata(snapshot.data());
           setlist(snapshot.data().Todolist);
-          console.log(snapshot.data());
         } else {
           call();
         }
@@ -110,9 +109,6 @@ export default function Home() {
     uid !== null && def();
   }, []);
   const set = async () => {
-    console.log(data);
-    console.log(note);
-    console.log(text);
     setarray({ ...data, Notes: [...note, text] });
   };
   useEffect(() => {
@@ -124,12 +120,7 @@ export default function Home() {
   useEffect(() => {
     uid === null && router.push("login");
   }, [uid]);
-  useEffect(() => {
-    auth.currentUser !== null && console.log(auth.currentUser);
-  }, [auth.currentUser]);
-  const test = () => {
-    console.log(auth.currentUser);
-  };
+
   const closeNote = () => {
     setmodal(!modal);
   };
@@ -229,8 +220,8 @@ export default function Home() {
           <div className="m-4">
             <h2 className=" text-slate-50 text-xl md:text-3xl">Tasks</h2>
             <div className="flex flex-wrap">
-              {list.map((c) => (
-                <Todo check={checked} lists={c} delete={deleteList} />
+              {list.map((c, i) => (
+                <Todo key={i} check={checked} lists={c} delete={deleteList} />
               ))}
             </div>
           </div>

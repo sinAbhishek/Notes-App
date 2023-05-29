@@ -73,7 +73,7 @@ function DrawerMlist(prop) {
 
         <div className="flex justify-center flex-col">
           {count.map((c, i) => (
-            <div className="inputcont flex justify-center m-2">
+            <div key={i} className="inputcont flex justify-center m-2">
               <input
                 className="p-2 rounded-sm w-72 sm:w-2/3 h-12"
                 onChange={handlechange}

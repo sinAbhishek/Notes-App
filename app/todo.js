@@ -18,8 +18,8 @@ const Todo = (prop) => {
       >
         <IoMdCloseCircle size={"2rem"} />
       </button>
-      {prop.lists.list.map((c) => (
-        <div className="flex items-center">
+      {prop.lists.list.map((c, i) => (
+        <div key={i} className="flex items-center">
           <input
             className="w-4 h-4"
             id={c.id}
