@@ -12,7 +12,7 @@ import {
 import { Authcontext } from "../authcontext";
 import Link from "next/link";
 
-const page = () => {
+const Register = () => {
   const router = useRouter();
   const [detail, setdetail] = useState({ email: "", password: "" });
   const [msg, setmsg] = useState("");
@@ -92,3 +92,5 @@ const page = () => {
     </>
   );
 };
+
+export default Register;

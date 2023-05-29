@@ -27,7 +27,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
 // Add a new document with a generated id.
 
-export default function home() {
+export default function Home() {
   const router = useRouter();
   const auth = getAuth();
   const { uid, dispatch } = useContext(Authcontext);

@@ -6,7 +6,7 @@ import { auth } from "../firebase";
 import { useRouter } from "next/navigation";
 import { Authcontext } from "../authcontext";
 import Link from "next/link";
-const login = () => {
+const Login = () => {
   const router = useRouter();
   const uid = localStorage.getItem("uid");
   const { dispatch } = useContext(Authcontext);
@@ -73,3 +73,5 @@ const login = () => {
     </div>
   );
 };
+
+export default Login;
