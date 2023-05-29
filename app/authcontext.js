@@ -2,7 +2,7 @@
 
 const { createContext, useReducer, useEffect } = require("react");
 
-const INTIAL_STATE = { uid: JSON.parse(localStorage.getItem("uid")) || null };
+const INTIAL_STATE = { uid: null };
 
 const Authreducer = (state, action) => {
   switch (action.type) {
@@ -21,9 +21,7 @@ const Authreducer = (state, action) => {
 export const Authcontext = createContext(INTIAL_STATE);
 export const AuthcontextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Authreducer, INTIAL_STATE);
-  useEffect(() => {
-    localStorage.setItem("uid", JSON.stringify(state.uid));
-  }, [state.uid]);
+
   return (
     <Authcontext.Provider value={{ uid: state.uid, dispatch }}>
       {children}

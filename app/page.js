@@ -1,7 +1,7 @@
 "use client";
 import { Authcontext } from "./authcontext";
 import { useContext } from "react";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { auth } from "./firebase";
 import React, { useEffect, useState } from "react";
@@ -118,9 +118,9 @@ export default function Home() {
     };
     array && call();
   }, [array, uid]);
-  // useEffect(() => {
-  //   uid === null && router.push("login");
-  // }, [uid, router]);
+  useEffect(() => {
+    uid === null && router.push("login");
+  }, [uid, router]);
 
   const closeNote = () => {
     setmodal(!modal);

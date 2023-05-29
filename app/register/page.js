@@ -1,6 +1,6 @@
 "use client";
 import { auth } from "../firebase";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState, useContext } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {
@@ -25,7 +25,7 @@ const Register = () => {
         // Signed in
         const user = userCredential.user;
         dispatch({ type: "LOGIN", payload: user.uid });
-        // router.push("/");
+        router.push("/");
 
         // ...
       })
