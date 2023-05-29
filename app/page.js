@@ -27,7 +27,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
 // Add a new document with a generated id.
 
-export default function Home() {
+export default function home() {
   const router = useRouter();
   const auth = getAuth();
   const { uid, dispatch } = useContext(Authcontext);
@@ -107,7 +107,7 @@ export default function Home() {
       };
     };
     uid !== null && def();
-  }, []);
+  }, [uid]);
   const set = async () => {
     setarray({ ...data, Notes: [...note, text] });
   };
@@ -116,10 +116,10 @@ export default function Home() {
       const res = await setDoc(doc(db, "notes", uid), { ...array });
     };
     array && call();
-  }, [array]);
+  }, [array, uid]);
   useEffect(() => {
     uid === null && router.push("login");
-  }, [uid]);
+  }, [uid, router]);
 
   const closeNote = () => {
     setmodal(!modal);

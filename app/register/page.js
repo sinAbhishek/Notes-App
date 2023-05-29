@@ -12,7 +12,7 @@ import {
 import { Authcontext } from "../authcontext";
 import Link from "next/link";
 
-const Page = () => {
+const page = () => {
   const router = useRouter();
   const [detail, setdetail] = useState({ email: "", password: "" });
   const [msg, setmsg] = useState("");
@@ -92,5 +92,3 @@ const Page = () => {
     </>
   );
 };
-
-export default Page;
