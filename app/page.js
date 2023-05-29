@@ -19,10 +19,12 @@ import Todo from "./todo";
 import DrawerMlist from "./drawerMlist";
 import { AddIcon } from "@chakra-ui/icons";
 import { IoMdCloseCircle } from "react-icons/io";
+import { AiOutlineLogout } from "react-icons/ai";
 import { GiNotebook } from "react-icons/gi";
 import { HiClipboardList } from "react-icons/hi";
 import DrawerNote from "./drawerNote";
 import { getAuth, signOut } from "firebase/auth";
+import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
 // Add a new document with a generated id.
 
 export default function Home() {
@@ -163,6 +165,7 @@ export default function Home() {
     !dNoteOpen && expand();
     setdNoteOpen(!dNoteOpen);
   };
+
   return (
     <div
       style={{ minHeight: "100vh" }}
@@ -174,15 +177,20 @@ export default function Home() {
             className="my-8 flex justify-between  items-cente bg-slate-300 w-full p-4 cursor-pointer"
             onClick={openNote}
           >
-            Note <GiNotebook display={"inline-block"} size={"2rem"} />
+            <h2 className=" font-semibold text-xl">Note</h2>
+            <GiNotebook
+              color="#1b65c4"
+              display={"inline-block"}
+              size={"2rem"}
+            />
           </div>
           <div
             className="my-8 flex justify-between items-center bg-slate-300 w-full p-4 cursor-pointer"
             onClick={closeList}
           >
-            List{" "}
+            <h2 className=" font-semibold text-xl">List</h2>
             <HiClipboardList
-              color="red"
+              color="#1b65c4"
               display={"inline-block"}
               size={"2rem"}
             />
@@ -263,15 +271,24 @@ export default function Home() {
         submit={set}
         color={colorchange}
       />
+      <div
+        onClick={signout}
+        className=" bg-red-500 p-2 m-4 rounded-md w-12 h-12 flex  justify-center items-center fixed top-0 right-0 md:hidden cursor-pointer"
+      >
+        <button>
+          <AiOutlineLogout size={"1.5rem"} />
+        </button>
+      </div>
       <div className="">
         <motion.div layout className="  fixed bottom-0 right-0 md:hidden m-4 ">
           {!menu && (
             <motion.div
+              onClick={expand}
               style={{ backgroundColor: "#00fff7" }}
-              className="border-2 border-white flex justify-center items-center rounded-full w-16 h-16"
+              className="border-2 border-white flex justify-center items-center rounded-full cursor-pointer w-16 h-16"
             >
-              <button disabled={dMlOpen || dNoteOpen} onClick={expand}>
-                <AddIcon />
+              <button disabled={dMlOpen || dNoteOpen}>
+                <AddIcon w={"1rem"} h={"1rem"} />
               </button>
             </motion.div>
           )}
@@ -279,26 +296,34 @@ export default function Home() {
             <motion.div
               layout
               className=" w-44 h-50 rounded-md "
-              style={{ backgroundColor: "#f75774" }}
+              style={{ backgroundColor: "#134b57" }}
             >
-              <motion.button onClick={expand}>
-                <IoMdCloseCircle size={"2rem"} />
+              <motion.button onClick={expand} className="m-2">
+                <CloseIcon w={"1rem"} h={"1rem"} />
               </motion.button>
               <motion.div className="flex flex-col justify-center ">
                 <motion.div
                   onClick={DrawerLM}
-                  className="flex m-2 items-center justify-between"
+                  className="flex m-2 items-center justify-between cursor-pointer"
                 >
-                  <motion.p className=" inline-block">ADD NOTES</motion.p>
-                  <GiNotebook display={"inline-block"} size={"2rem"} />
+                  <motion.p className=" inline-block font-semibold text-lg text-gray-100">
+                    Add Notes
+                  </motion.p>
+                  <GiNotebook
+                    color="#e6eef0"
+                    display={"inline-block"}
+                    size={"2rem"}
+                  />
                 </motion.div>
                 <motion.div
                   onClick={DrawerMoC}
-                  className="flex m-2 items-center justify-between"
+                  className="flex m-2 items-center justify-between cursor-pointer"
                 >
-                  <motion.p className=" inline-block">ADD TODOLIST</motion.p>
+                  <motion.p className=" inline-block font-semibold text-lg text-gray-100">
+                    Add Todolist
+                  </motion.p>
                   <HiClipboardList
-                    color="red"
+                    color="#e6eef0"
                     display={"inline-block"}
                     size={"2rem"}
                   />

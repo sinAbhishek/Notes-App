@@ -15,24 +15,24 @@ const DrawerNote = (prop) => {
     <div
       className={
         prop.isOpen
-          ? "color bg-slate-400 rounded-md absolute  w-screen  bottom-0 right-0 transition ease-in-out duration-700"
+          ? "color bg-slate-400 rounded-md absolute  w-full bottom-0 right-0 transition ease-in-out duration-700"
           : styles.hide
       }
       style={{ backgroundColor: color, height: "90%" }}
     >
       <div
         onClick={prop.onClose}
-        className=" bg-red-500 rounded-full w-8 h-8 p-2 flex justify-center items-center"
+        className=" rounded-full m-2 w-8 h-8 p-2 flex justify-center items-center"
       >
         <button>
-          <CloseIcon />
+          <CloseIcon w={"1.3rem"} h={"1.3rem"} />
         </button>
       </div>
 
       <h2 className=" text-lg font-semibold p-2">NOTE</h2>
       <div className="flex justify-center h-5/6">
         <textarea
-          className=" w-11/12 p-4 h-2/3 rounded-md "
+          className=" w-11/12 p-2 h-2/3 rounded-md "
           name=""
           id="text"
           cols="30"
