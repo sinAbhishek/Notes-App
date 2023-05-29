@@ -3,12 +3,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-// import { useRouter } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Authcontext } from "../authcontext";
+
 import Link from "next/link";
 const Login = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const uid = localStorage.getItem("uid");
   const { dispatch } = useContext(Authcontext);
   const [detail, setdetails] = useState({ email: "", password: "" });
@@ -26,7 +26,7 @@ const Login = () => {
         const user = userCredential.user;
         console.log(user);
         dispatch({ type: "LOGIN", payload: user.uid });
-        router.push("/");
+        // router.push("/");
         // ...
       })
       .catch((error) => {

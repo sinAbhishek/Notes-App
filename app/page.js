@@ -118,9 +118,9 @@ export default function Home() {
     };
     array && call();
   }, [array, uid]);
-  useEffect(() => {
-    uid === null && router.push("login");
-  }, [uid, router]);
+  // useEffect(() => {
+  //   uid === null && router.push("login");
+  // }, [uid, router]);
 
   const closeNote = () => {
     setmodal(!modal);
