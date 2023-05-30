@@ -13,14 +13,19 @@ const Login = () => {
   const [loading, setloading] = useState(false);
   const { uid, dispatch } = useContext(Authcontext);
   const [detail, setdetails] = useState({ email: "", password: "" });
-
+  const demoUser = () => {
+    setdetails({ email: "demo@gmail.com", password: "123456" });
+  };
+  useEffect(() => {
+    detail.email === "demo@gmail.com" && login();
+  }, [detail]);
   const handlechange = (e) => {
     e.preventDefault();
     setdetails((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const login = (e) => {
     setloading(true);
-    e.preventDefault();
+    e && e.preventDefault();
     console.log(detail);
     signInWithEmailAndPassword(auth, detail.email, detail.password)
       .then((userCredential) => {
@@ -82,6 +87,12 @@ const Login = () => {
             <h2 className=" text-sky-500 my-2">Register</h2>
           </Link>
         </form>
+        <button
+          onClick={demoUser}
+          className=" bg-green-500 w-64 h-8 rounded my-2 text-slate-100"
+        >
+          Login as guest
+        </button>
       </div>
     </div>
   );

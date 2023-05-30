@@ -224,7 +224,7 @@ export default function Home() {
               My Notes
             </h2>
             <div className=" bg-green-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
-              <p className=" font-semibold text-lg">Start adding notes</p>
+              <p className=" font-sans  text-xl">Start adding notes</p>
             </div>
           </div>
         )}
@@ -246,7 +246,7 @@ export default function Home() {
               Tasks
             </h2>
             <div className=" bg-red-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
-              <p className=" font-semibold text-lg">Create your todo list</p>
+              <p className=" font-sans text-xl">Create your todo list</p>
             </div>
           </div>
         )}
@@ -341,7 +341,6 @@ export default function Home() {
           )}
         </motion.div>
       </div>
-      {/* <BotDrawer onClose={openColor} isOpen={isOpen} /> */}
     </div>
   );
 }
