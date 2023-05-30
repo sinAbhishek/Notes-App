@@ -214,11 +214,11 @@ export default function Home() {
           </div>
         ) : (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
               My Notes
             </h2>
-            <div className=" bg-slate-300 w-60 h-72 rounded-md flex justify-center items-center m-4">
-              <p>Add notes</p>
+            <div className=" bg-orange-300 w-60 h-48 rounded-md flex justify-center items-center m-4">
+              <p className=" font-semibold">Start adding notes</p>
             </div>
           </div>
         )}
@@ -236,11 +236,11 @@ export default function Home() {
           </div>
         ) : (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
               Tasks
             </h2>
-            <div className=" bg-slate-300 w-60 h-72 rounded-md flex justify-center items-center m-4">
-              <p>Add todo list</p>
+            <div className=" bg-red-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
+              <p className=" font-semibold">Create your todo list</p>
             </div>
           </div>
         )}

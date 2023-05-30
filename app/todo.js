@@ -10,7 +10,7 @@ const Todo = (prop) => {
   return (
     <div
       style={{ backgroundColor: prop.lists.color }}
-      className=" w-64 p-4 m-1 rounded-md h-40 relative"
+      className=" w-72 p-4 m-1 rounded-md h-40 relative"
     >
       <button
         className="absolute top-0 right-0 px-2"
@@ -19,7 +19,7 @@ const Todo = (prop) => {
         <CloseIcon w={".8rem"} height={".8rem"} color={"#a6115e"} />
       </button>
       {prop.lists.list.map((c, i) => (
-        <div key={i} className="flex items-center">
+        <div key={i} className="flex items-center my-2">
           <input
             className="w-4 h-4"
             id={c.id}
@@ -29,7 +29,7 @@ const Todo = (prop) => {
           />
           <p
             style={{ textDecoration: c.checked ? "line-through" : "none" }}
-            className=" mx-2 text-sm md:text-base"
+            className=" mx-2 font-medium text-base md:text-lg"
           >
             {c.text}
           </p>

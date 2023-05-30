@@ -83,13 +83,13 @@ function DrawerMlist(prop) {
           <button onClick={clickhandle}>
             <AddIcon />
           </button>
+          <button
+            className="p-2  border-black border bg-cyan-300 rounded-md w-12 mx-auto my-4"
+            onClick={() => test()}
+          >
+            <CheckIcon />
+          </button>
           <div className="flex justify-center">
-            <button
-              className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-16"
-              onClick={() => test()}
-            >
-              <CheckIcon />
-            </button>
             <BotDrawer color={changecolor} />
           </div>
         </div>

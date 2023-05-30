@@ -48,7 +48,7 @@ const DrawerNote = (prop) => {
 
       <div className="flex justify-center">
         <button
-          className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-16"
+          className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-20"
           onClick={submit}
         >
           <CheckIcon />
