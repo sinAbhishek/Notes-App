@@ -153,7 +153,13 @@ export default function Home() {
     setdMlOpen(!dMlOpen);
   };
   const expand = () => {
-    setmenu(!menu);
+    if (dMlOpen) {
+      console.log("cant");
+    } else if (dNoteOpen) {
+      console.log("cant");
+    } else {
+      setmenu(!menu);
+    }
   };
   const DrawerLM = () => {
     !dNoteOpen && expand();
@@ -217,7 +223,7 @@ export default function Home() {
             <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
               My Notes
             </h2>
-            <div className=" bg-orange-300 w-60 h-48 rounded-md flex justify-center items-center m-4">
+            <div className=" bg-green-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
               <p className=" font-semibold text-base">Start adding notes</p>
             </div>
           </div>
@@ -289,7 +295,7 @@ export default function Home() {
               style={{ backgroundColor: "#00fff7" }}
               className="border-2 border-white flex justify-center items-center rounded-full cursor-pointer w-16 h-16"
             >
-              <button disabled={dMlOpen || dNoteOpen}>
+              <button>
                 <AddIcon w={"1rem"} h={"1rem"} />
               </button>
             </motion.div>
