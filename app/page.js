@@ -203,7 +203,7 @@ export default function Home() {
       <div className="flex flex-col">
         {note[0] ? (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
               My Notes
             </h2>
             <div className="flex flex-wrap  ">
@@ -218,14 +218,14 @@ export default function Home() {
               My Notes
             </h2>
             <div className=" bg-orange-300 w-60 h-48 rounded-md flex justify-center items-center m-4">
-              <p className=" font-semibold">Start adding notes</p>
+              <p className=" font-semibold text-base">Start adding notes</p>
             </div>
           </div>
         )}
 
         {list[0] ? (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
               Tasks
             </h2>
             <div className="flex flex-wrap">
@@ -240,7 +240,7 @@ export default function Home() {
               Tasks
             </h2>
             <div className=" bg-red-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
-              <p className=" font-semibold">Create your todo list</p>
+              <p className=" font-semibold text-base">Create your todo list</p>
             </div>
           </div>
         )}
@@ -301,7 +301,7 @@ export default function Home() {
               style={{ backgroundColor: "#134b57" }}
             >
               <motion.button onClick={expand} className="m-2">
-                <CloseIcon w={"1rem"} h={"1rem"} />
+                <CloseIcon w={"1rem"} h={"1rem"} color={"white"} />
               </motion.button>
               <motion.div className="flex flex-col justify-center ">
                 <motion.div
