@@ -48,7 +48,7 @@ const Register = () => {
     <>
       <div className="flex flex-col justify-center items-center w-screen h-screen bg-slate-300">
         <h2 className=" text-3xl my-16 font-bold">REGISTER</h2>
-        <div className=" bg-slate-900 rounded-md flex flex-col justify-center items-center">
+        <div className=" bg-slate-900 rounded-md flex flex-col justify-center items-center p-4">
           <form className="flex flex-col m-8 " onSubmit={send}>
             <input
               id="email"
