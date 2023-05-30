@@ -16,7 +16,10 @@ const Notemodal = (prop) => {
     setcolor(value);
     prop.color(value);
   };
-
+  const submit = () => {
+    prop.submit();
+    prop.onClose();
+  };
   return (
     <>
       <Modal isOpen={prop.isOpen} onClose={prop.onClose}>
@@ -41,7 +44,7 @@ const Notemodal = (prop) => {
             <div className="flex justify-center">
               <button
                 className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-8"
-                onClick={prop.submit}
+                onClick={submit}
               >
                 <CheckIcon />
               </button>

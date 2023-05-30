@@ -11,6 +11,10 @@ const DrawerNote = (prop) => {
     setcolor(value);
     prop.color(value);
   };
+  const submit = () => {
+    prop.submit();
+    prop.onClose();
+  };
   return (
     <div
       className={
@@ -45,7 +49,7 @@ const DrawerNote = (prop) => {
       <div className="flex justify-center">
         <button
           className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-16"
-          onClick={prop.submit}
+          onClick={submit}
         >
           <CheckIcon />
         </button>

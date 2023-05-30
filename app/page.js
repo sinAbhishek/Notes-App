@@ -165,7 +165,7 @@ export default function Home() {
       style={{ minHeight: "100vh" }}
       className="md:h-max h-max w-screen flex bg-slate-900 "
     >
-      <div className="sidepanel md:flex md:flex-col md:justify-between sticky top-0 left-0 h-screen w-40 bg-slate-100  hidden ">
+      <div className="sidepanel md:flex md:flex-col md:justify-between sticky top-0 left-0 h-screen w-40 bg-slate-700  hidden ">
         <div className="">
           <div
             className="my-8 flex justify-between  items-cente bg-slate-300 w-full p-4 cursor-pointer"
@@ -203,7 +203,9 @@ export default function Home() {
       <div className="flex flex-col">
         {note[0] ? (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl">My Notes</h2>
+            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+              My Notes
+            </h2>
             <div className="flex flex-wrap  ">
               {note.map((c) => (
                 <Notes key={c.id} notes={c} delete={deleteNote} />
@@ -212,8 +214,10 @@ export default function Home() {
           </div>
         ) : (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl">My Notes</h2>
-            <div className=" bg-slate-300 w-60 h-80 rounded-md flex justify-center items-center m-4">
+            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+              My Notes
+            </h2>
+            <div className=" bg-slate-300 w-60 h-72 rounded-md flex justify-center items-center m-4">
               <p>Add notes</p>
             </div>
           </div>
@@ -221,7 +225,9 @@ export default function Home() {
 
         {list[0] ? (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl">Tasks</h2>
+            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+              Tasks
+            </h2>
             <div className="flex flex-wrap">
               {list.map((c, i) => (
                 <Todo key={i} check={checked} lists={c} delete={deleteList} />
@@ -230,8 +236,10 @@ export default function Home() {
           </div>
         ) : (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-xl md:text-3xl">Tasks</h2>
-            <div className=" bg-slate-300 w-60 h-80 rounded-md flex justify-center items-center m-4">
+            <h2 className=" text-slate-50 text-xl md:text-3xl font-semibold my-4">
+              Tasks
+            </h2>
+            <div className=" bg-slate-300 w-60 h-72 rounded-md flex justify-center items-center m-4">
               <p>Add todo list</p>
             </div>
           </div>

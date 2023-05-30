@@ -1,22 +1,22 @@
 import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
+import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
+
 const Todo = (prop) => {
   const handle = (e) => {
-    console.log(e.target.id);
     prop.check(prop.lists.id, e.target.id);
-    console.log(prop.lists.id);
   };
-  console.log(prop.lists);
+
   return (
     <div
       style={{ backgroundColor: prop.lists.color }}
       className=" w-64 p-4 m-1 rounded-md h-40 relative"
     >
       <button
-        className="absolute top-0 right-0"
+        className="absolute top-0 right-0 px-2"
         onClick={() => prop.delete(prop.lists.id)}
       >
-        <IoMdCloseCircle size={"2rem"} />
+        <CloseIcon w={".8rem"} height={".8rem"} color={"#a6115e"} />
       </button>
       {prop.lists.list.map((c, i) => (
         <div key={i} className="flex items-center">
@@ -27,7 +27,12 @@ const Todo = (prop) => {
             type="checkbox"
             onChange={handle}
           />
-          <p className=" mx-2 text-sm md:text-base">{c.text}</p>
+          <p
+            style={{ textDecoration: c.checked ? "line-through" : "none" }}
+            className=" mx-2 text-sm md:text-base"
+          >
+            {c.text}
+          </p>
         </div>
       ))}
     </div>

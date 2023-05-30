@@ -27,9 +27,7 @@ function DrawerMlist(prop) {
   const test = () => {
     const arr = Object.values(list);
     prop.submit(arr, color);
-    console.log(count.length);
-    console.log(arr);
-    console.log(color);
+    prop.onClose();
   };
   const handlechange = (e) => {
     console.log(e.target.id);
@@ -43,13 +41,8 @@ function DrawerMlist(prop) {
     }));
   };
   const remove = (value, i) => {
-    // const filterId=id.filter((c)=>c!==id)
-    // const filterlist=list.filter((c)=>)
-    // setid(filterId)
     delete list[value];
-    // const arr = count;
-    // arr.pop();
-    // setcount(arr);
+
     const arr = [...count];
     arr.splice(i, 1);
     setcount(arr);
