@@ -59,7 +59,11 @@ const Todomodal = (prop) => {
     <>
       <Modal isOpen={prop.isOpen} onClose={prop.onClose}>
         <ModalOverlay />
-        <ModalContent h={"60vh"} backgroundColor={color}>
+        <ModalContent
+          h={"60vh"}
+          backgroundColor={color}
+          style={{ transition: "ease-in-out .7s" }}
+        >
           <ModalHeader>NOTE</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

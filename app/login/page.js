@@ -6,9 +6,11 @@ import { auth } from "../firebase";
 import { useRouter } from "next/navigation";
 import { Authcontext } from "../authcontext";
 import Link from "next/link";
+import { Spinner } from "@chakra-ui/react";
+
 const Login = () => {
   const router = useRouter();
-
+  const [loading, setloading] = useState(false);
   const { uid, dispatch } = useContext(Authcontext);
   const [detail, setdetails] = useState({ email: "", password: "" });
 
@@ -17,11 +19,13 @@ const Login = () => {
     setdetails((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const login = (e) => {
+    setloading(true);
     e.preventDefault();
     console.log(detail);
     signInWithEmailAndPassword(auth, detail.email, detail.password)
       .then((userCredential) => {
         // Signed in
+        setloading(false);
         const user = userCredential.user;
         console.log(user);
         dispatch({ type: "LOGIN", payload: user.uid });
@@ -64,6 +68,15 @@ const Login = () => {
           >
             LOGIN
           </button>
+          {loading && (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          )}
           <Link href="/register">
             {" "}
             <h2 className=" text-sky-500 my-2">Register</h2>

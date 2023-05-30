@@ -11,18 +11,22 @@ import {
 } from "@chakra-ui/react";
 import { Authcontext } from "../authcontext";
 import Link from "next/link";
+import { Spinner } from "@chakra-ui/react";
 
 const Register = () => {
   const router = useRouter();
+  const [loading, setloading] = useState(false);
   const [detail, setdetail] = useState({ email: "", password: "" });
   const [msg, setmsg] = useState("");
   const { dispatch } = useContext(Authcontext);
   const send = (e) => {
+    setloading(true);
     e.preventDefault();
     console.log(detail);
     createUserWithEmailAndPassword(auth, detail.email, detail.password)
       .then((userCredential) => {
         // Signed in
+        setloading(false);
         const user = userCredential.user;
         dispatch({ type: "LOGIN", payload: user.uid });
         router.push("/");
@@ -75,6 +79,15 @@ const Register = () => {
               Submit
             </button>
           </form>
+          {loading && (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          )}
           <Link className="flex justify-center items-center" href="/login">
             <p className=" text-slate-50">Already registered? </p>
             <h2 className="text-sky-500  text-lg">Login</h2>
