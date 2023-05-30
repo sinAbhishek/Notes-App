@@ -34,9 +34,9 @@ const DrawerNote = (prop) => {
       </div>
 
       <h2 className=" text-lg font-semibold p-2">NOTE</h2>
-      <div className="flex justify-center h-5/6">
+      <div className="flex justify-center h-3/6">
         <textarea
-          className=" w-11/12 p-2 h-2/3 rounded-md "
+          className=" w-11/12 p-2 h-full rounded-md "
           name=""
           id="text"
           cols="30"
@@ -45,15 +45,16 @@ const DrawerNote = (prop) => {
           onChange={prop.note}
         ></textarea>
       </div>
-
-      <div className="flex justify-center">
+      <div className="flex justify-center m-4">
         <button
-          className="p-2  border-black border bg-cyan-300 rounded-md w-12 absolute bottom-20"
+          className="p-2  border-black border bg-cyan-300 rounded-md w-12 mx-auto "
           onClick={submit}
         >
           <CheckIcon />
         </button>
+      </div>
 
+      <div className="flex justify-center">
         <BotDrawer color={changecolor} />
       </div>
     </div>
