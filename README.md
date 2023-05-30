@@ -2,14 +2,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Preview
 
+<img src="https://github.com/sinAbhishek/Notes-App/assets/127949220/a3b9ac8f-e7bf-4763-b4f9-3052c9de5be1"  height="650px" />
+<img src="https://github.com/sinAbhishek/Notes-App/assets/127949220/c9577816-8683-4460-9aa7-14c51ca97215"  height="650px"/>
 
-<img src="https://github.com/sinAbhishek/Notes-App/assets/127949220/a3b9ac8f-e7bf-4763-b4f9-3052c9de5be1" width:"300px"/>
-
-
-
-![NOteDrawer](https://github.com/sinAbhishek/Notes-App/assets/127949220/c9577816-8683-4460-9aa7-14c51ca97215)
-
-![TaskDrawer](https://github.com/sinAbhishek/Notes-App/assets/127949220/ae86ecda-0af0-4ba5-82d0-997a544c6df8)
+<img src="https://github.com/sinAbhishek/Notes-App/assets/127949220/ae86ecda-0af0-4ba5-82d0-997a544c6df8"  height="650px"/>
 
 
 
