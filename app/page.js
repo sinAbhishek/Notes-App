@@ -2,6 +2,18 @@
 import { Authcontext } from "./authcontext";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
+import { Architects_Daughter, Kanit } from "next/font/google";
+
+const roboto = Architects_Daughter({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+const kanit = Architects_Daughter({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 import Image from "next/image";
 import { auth } from "./firebase";
 import React, { useEffect, useState } from "react";
@@ -198,10 +210,10 @@ export default function Home() {
         </div>
 
         <button
-          className=" bg-red-500 rounded-md my-4 w-max mx-auto p-2"
+          className=" bg-red-500 text-white rounded-md my-4 w-max mx-auto px-2 py-1 hover:scale-110 duration-300"
           onClick={() => signout()}
         >
-          logout
+          Logout
         </button>
       </div>
 
@@ -220,11 +232,15 @@ export default function Home() {
           </div>
         ) : (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
+            <h2
+              className={`${kanit.className} text-slate-50 text-2xl md:text-3xl my-4`}
+            >
               My Notes
             </h2>
             <div className=" bg-green-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
-              <p className=" font-sans  text-xl">Start adding notes</p>
+              <p className={`${roboto.className} text-xl`}>
+                Start adding notes
+              </p>
             </div>
           </div>
         )}
@@ -242,11 +258,15 @@ export default function Home() {
           </div>
         ) : (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
+            <h2
+              className={`${kanit.className} text-slate-50 text-2xl md:text-3xl my-4`}
+            >
               Tasks
             </h2>
             <div className=" bg-red-400 w-60 h-48 rounded-md flex justify-center items-center m-4">
-              <p className=" font-sans text-xl">Create your todo list</p>
+              <p className={`${roboto.className} text-xl`}>
+                Create your todo list
+              </p>
             </div>
           </div>
         )}
