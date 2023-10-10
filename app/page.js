@@ -3,7 +3,7 @@ import { Authcontext } from "./authcontext";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Architects_Daughter, Kanit } from "next/font/google";
-
+import ScaleLoader from "react-spinners/PacmanLoader";
 const roboto = Architects_Daughter({
   weight: "400",
   subsets: ["latin"],
@@ -48,6 +48,7 @@ export default function Home() {
   const [menu, setmenu] = useState(false);
   const [color, setcolor] = useState("#f1f5f9");
   const [data, setdata] = useState([]);
+  const [loading, setloading] = useState(true);
   const [list, setlist] = useState([]);
   const [text, settext] = useState("");
   const [array, setarray] = useState("");
@@ -57,6 +58,9 @@ export default function Home() {
   const [listOpen, setlistOpen] = useState(false);
   const [isOpen, setisOpen] = useState(false);
   const btnRef = React.useRef();
+  useEffect(() => {
+    uid === null ? router.push("login") : setloading(false);
+  }, [uid, router]);
   const handle = (e) => {
     e.preventDefault();
     settext({
@@ -132,9 +136,6 @@ export default function Home() {
     };
     array && call();
   }, [array, uid]);
-  useEffect(() => {
-    uid === null && router.push("login");
-  }, [uid, router]);
 
   const closeNote = () => {
     setmodal(!modal);
@@ -178,7 +179,18 @@ export default function Home() {
     setdNoteOpen(!dNoteOpen);
   };
 
-  return (
+  return loading ? (
+    <div className=" w-screen h-screen  bg-gray-800 bg-cover bg-no-repeat bg z-50 flex items-center justify-center">
+      <ScaleLoader
+        color={"red"}
+        loading={loading}
+        width={"3px"}
+        height={"20px"}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  ) : (
     <div
       style={{ minHeight: "100vh" }}
       className="md:h-max h-max w-screen flex bg-slate-900 "
@@ -186,7 +198,7 @@ export default function Home() {
       <div className="sidepanel md:flex md:flex-col md:justify-between sticky top-0 left-0 h-screen w-40 bg-slate-700  hidden ">
         <div className="">
           <div
-            className="my-8 flex justify-between  items-cente bg-slate-300 w-full p-4 cursor-pointer"
+            className="my-8 flex justify-between  items-cente bg-slate-300 w-full p-4 cursor-pointer hover:scale-105 transition hover:bg-slate-400"
             onClick={openNote}
           >
             <h2 className=" font-semibold text-xl">Note</h2>
@@ -197,7 +209,7 @@ export default function Home() {
             />
           </div>
           <div
-            className="my-8 flex justify-between items-center bg-slate-300 w-full p-4 cursor-pointer"
+            className="my-8 flex justify-between items-center bg-slate-300 w-full p-4 cursor-pointer hover:scale-105 transition hover:bg-slate-400"
             onClick={closeList}
           >
             <h2 className=" font-semibold text-xl">List</h2>
@@ -221,7 +233,9 @@ export default function Home() {
       <div className="flex flex-col">
         {note[0] ? (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
+            <h2
+              className={` ${kanit.className} text-slate-50 text-2xl md:text-3xl font-semibold my-4`}
+            >
               My Notes
             </h2>
             <div className="flex flex-wrap  ">
@@ -247,7 +261,9 @@ export default function Home() {
 
         {list[0] ? (
           <div className="m-4">
-            <h2 className=" text-slate-50 text-2xl md:text-3xl font-semibold my-4">
+            <h2
+              className={`${kanit.className} text-slate-50 text-2xl md:text-3xl font-semibold my-4`}
+            >
               Tasks
             </h2>
             <div className="flex flex-wrap">
